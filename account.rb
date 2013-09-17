@@ -1,5 +1,5 @@
 class Account
-  attr_reader :transactions
+  attr_accessor :transactions, :acct_number
 
   def initialize(acct_number, starting_balance = 0)
     validate_number(acct_number)
@@ -17,8 +17,8 @@ class Account
     @acct_number.sub(Regexp.new("^.{#{hidden_length}}"), "*" * hidden_length)
   end
 
-  def deposit!(amount) 
-    raise NegativeDepositError if amount < 0 
+  def deposit!(amount)
+    raise NegativeDepositError if amount < 0
     add_transaction(amount)
 
     balance
